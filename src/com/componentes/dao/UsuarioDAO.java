@@ -121,31 +121,21 @@ public class UsuarioDAO extends Servicio{
 	}
 	
 	
-	public List<Usuario> GetList() {
+	public List<Usuario> GetList() throws Exception {
 		
-		this.startEntityManagerFactory();
-		
-		List<Usuario> listaRetorno = new ArrayList<>();
-		
-		listaRetorno = (List<Usuario>)em.createNamedQuery("Usuario.GetAll").getResultList();
-		
-		this.stopEntityManagerFactory();
-		
-		return listaRetorno;
-		
+		try {
+			
+			this.startEntityManagerFactory();
+			List<Usuario> listaRetorno = new ArrayList<>();
+			listaRetorno = (List<Usuario>)em.createNamedQuery("Usuario.GetAll").getResultList();
+			this.stopEntityManagerFactory();
+			return listaRetorno;
+			
+		} catch (Exception e) {
+			throw e; 
+		}
 	}
 	
 
-	public List<Usuario> getListUsuario(Usuario u){
-	
-		
-		this.startEntityManagerFactory();
-		this.em.getTransaction().begin();
-		TypedQuery<Usuario> query = (TypedQuery<Usuario>)em.createNamedQuery("Usuario.findPK", u.getClass());
-		this.stopEntityManagerFactory();
-		return query.getResultList();
-
-	}
-	
 	
 }

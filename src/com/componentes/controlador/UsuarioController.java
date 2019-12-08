@@ -84,7 +84,13 @@ public class UsuarioController {
 	
 	public List<Usuario> Get() {
 	
-		return _usuarioLG.GetAll(); 
+		try {
+			return _usuarioLG.GetAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null; 
+		} 
 	}
 
 

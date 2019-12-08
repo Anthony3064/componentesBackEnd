@@ -40,7 +40,7 @@ public class UsuarioLG {
 	public Usuario GetBbyId(int id) throws Exception {
 		return _usuarioDAO.Get(id); 
 	}
-	public List<Usuario> GetAll(){
+	public List<Usuario> GetAll() throws Exception{
 		return _usuarioDAO.GetList(); 
 	}
 
