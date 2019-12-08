@@ -27,11 +27,11 @@ public class TesterFormulario {
 
 	public static void main(String[] args) {
 
-		InsertarFormulario();
-		//ListFormularioPorID(1);
+		// InsertarFormulario();
+		 ListFormularioPorID(1);
 		// ListFormularios();
 		// EditarFormulario();
-		//ListarFormularioPorUsuario(); 
+		// ListarFormularioPorUsuario(); 
 		
 	}
 
@@ -54,11 +54,8 @@ public class TesterFormulario {
 //	} 
 
 	private static void InsertarFormulario() {
-		// Traemos un usuario
-		UsuarioTester ut = new UsuarioTester();
-		Usuario u = ut.RecuperarUsuario();
 
-		List<Formulario> lst = GetDummyForms(u);
+		List<Formulario> lst = GetDummyForms();
 
 		for (Formulario f : lst) {
 			f.setIsInterface(true);
@@ -131,7 +128,7 @@ public class TesterFormulario {
 		}
 	}
 
-	public static List<Formulario> GetDummyForms(Usuario usurio) {
+	public static List<Formulario> GetDummyForms() {
 
 		List<Formulario> retorno = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {

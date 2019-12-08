@@ -83,8 +83,13 @@ public class Encuesta implements Serializable {
 		FrmScaffolding = frmScaffolding;
 	}
 
-
+	public Usuario getUsuarioPadre() {
+		return this.UsuarioPadre; 
+	}
 	
+	public void setUsuarioPadre(Usuario usuario) {
+		this.UsuarioPadre = usuario; 
+	}
 	
 	
 }

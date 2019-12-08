@@ -26,6 +26,10 @@ public class EncuestaCL {
 	 * usar para obtener todas las encuestas por usuario 
 	 * */
 	public List<Encuesta> GetAll(Usuario usuario) throws Exception{
-		return null; 
+		return _encuestaDAO.GetList(usuario);  
+	}
+	
+	public void Update(Encuesta encuesta) throws Exception {
+		_encuestaDAO.Update(encuesta);
 	}
 }

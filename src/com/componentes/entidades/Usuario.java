@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
 	private String Correo;
 	private String Constrania;
 	        
-	@OneToMany(mappedBy="UsuarioPadre",cascade= CascadeType.ALL)
+	@OneToMany(mappedBy="UsuarioPadre", cascade= CascadeType.ALL)
 	private List<Encuesta> Encuestas;
 	private static final long serialVersionUID = 1L;
 	
@@ -89,11 +89,11 @@ public class Usuario implements Serializable {
 	public void setConstrania(String constrania) {
 		Constrania = constrania;
 	}
-	public List<Encuesta> GetFomurlarios(){
+	public List<Encuesta> GetEncuestas(){
 		return this.Encuestas; 
 	}
 	
-	public void setFormulario(List<Encuesta> listas) {
+	public void setEncuestas(List<Encuesta> listas) {
 		this.Encuestas = listas; 
 	}
 	

@@ -26,12 +26,13 @@ public class EncuestaController {
 				
 	}
 	
-	
-
-	
-	public void Update(int id) {
-		// TODO Auto-generated method stub
-		
+	public void Update(Encuesta encuesta) {
+		try {
+			_encuestaCL.Update(encuesta);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -41,8 +42,8 @@ public class EncuestaController {
 	}
 
 	
-	public Formulario Get(int id) {
-	
+	public Encuesta Get(int id) {
+		
 		return null; 
 		
 	}

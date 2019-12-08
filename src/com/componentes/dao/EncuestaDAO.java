@@ -29,9 +29,17 @@ public class EncuestaDAO extends Servicio{
 	}
 	
 	
-	public void Update(Object t) {
-		// TODO Auto-generated method stub
-		
+	public void Update(Encuesta t) throws Exception {
+		try {
+			this.startEntityManagerFactory();
+			em.getTransaction().begin();
+			em.merge((Encuesta)t);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
 	}
 
 	
@@ -69,35 +77,33 @@ public class EncuestaDAO extends Servicio{
 	}
 
 
-//	public List<Encuesta> GetList(Usuario usuario) {
-//		try {
-//			
-//			this.startEntityManagerFactory();
-//			this.em.getTransaction().begin();
-//			return this.findAllSQLWithParam(usuario); 
-//
-//		} catch (Exception e) {
-//			throw e; 
-//		}finally {
-//			this.stopEntityManagerFactory();
-//		}
-//	}
-//	
-//	
-//	
-//	public  List<Encuesta> findAllSQLWithParam(Usuario usuario) throws Exception {
-//		
-//		TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findAllSQLWithParam", Usuario.class);
-//		
-//		query.setParameter("idParam", usuario.getId());
-//		if(query.getResultList().size() > 0) {
-//			
-//			List<Encuesta> lst = query.getResultList().get(0).get
-//			return lst;
-//		}
-//		else
-//			return new ArrayList<Encuesta>(); 
-//	}
+	public List<Encuesta> GetList(Usuario usuario) throws Exception {
+		try {
+			
+			this.startEntityManagerFactory();
+			this.em.getTransaction().begin();
+			return this.findAllSQLWithParam(usuario); 
+
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
+	}
+	
+	public  List<Encuesta> findAllSQLWithParam(Usuario usuario) throws Exception {
+	
+	TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findAllSQLWithParam", Usuario.class);
+	
+	query.setParameter("idParam", usuario.getId());
+	if(query.getResultList().size() > 0) {
+		
+		List<Encuesta> lst = query.getResultList().get(0).GetEncuestas(); 
+		return lst;
+	}
+	else
+		return new ArrayList<Encuesta>(); 
+}
 
 	
 }

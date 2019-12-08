@@ -69,7 +69,6 @@ public class UsuarioDAO extends Servicio{
 			throw e;
 		}
 		finally {
-			
 			this.stopEntityManagerFactory();
 		} 
 	}
@@ -91,33 +90,7 @@ public class UsuarioDAO extends Servicio{
 		} 
 			
 	}
-	
-	public Usuario getUsuario(Usuario u) {
 		
-		Usuario usuario = null;
-		
-		try {
-			
-			this.startEntityManagerFactory();
-			
-			usuario = (Usuario)em.createNamedQuery("Usuario.GetUsuario").setParameter("usuarioParam", u).getSingleResult();
-			
-			if (usuario != null) {
-				return usuario;
-			}
-			
-			
-		} catch (Exception e) {
-			System.out.println("No hay registro.");
-		}finally {
-			
-			this.stopEntityManagerFactory();
-			
-		}
-		
-		return usuario;
-	}
-	
 	
 	public List<Usuario> GetList() throws Exception {
 		
