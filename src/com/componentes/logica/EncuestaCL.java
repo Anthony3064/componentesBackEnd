@@ -10,23 +10,22 @@ public class EncuestaCL {
 	EncuestaDAO _encuestaDAO = new EncuestaDAO();
 
 	public void Insertar(Encuesta encuesta) throws Exception {
+		
 		if (encuesta.getFrmScaffolding() == null) {
 			throw new Exception("El formulario Scaffolding no puede ser nulo");
 		} else
 			_encuestaDAO.Insert(encuesta);
 	}
 
-	public List<Encuesta> GetAll() {
+	public List<Encuesta> GetAll() throws Exception {
 
-		return null;
+		return _encuestaDAO.GetList();
 	}
 	
 	/**
 	 * usar para obtener todas las encuestas por usuario 
 	 * */
-	public List<Encuesta> GetAll(Usuario usuario) {
-		
-		
-		return null;
+	public List<Encuesta> GetAll(Usuario usuario) throws Exception{
+		return null; 
 	}
 }

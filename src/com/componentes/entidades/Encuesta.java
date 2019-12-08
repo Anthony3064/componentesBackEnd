@@ -26,12 +26,18 @@ import javax.persistence.OneToOne;
 		@NamedQuery(
 				name = "Encuesta.findPK", 
 				query = "SELECT f FROM Encuesta f"
+	),@NamedQuery(
+				name = "Formulario.DeUsuario", 
+				query = "SELECT f FROM Encuesta f WHERE f.UsuarioPadre = :usuarioParam "
 	)
 })
 
 
 public class Encuesta implements Serializable {
 	
+	/**
+	 * 
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
@@ -42,7 +48,11 @@ public class Encuesta implements Serializable {
 	//fk_Encuesta
 	@ManyToOne(cascade= CascadeType.ALL)
 	private Formulario FrmScaffolding; 
+	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="fk_Usuario")
+	private Usuario UsuarioPadre; 
 	
 	
 	

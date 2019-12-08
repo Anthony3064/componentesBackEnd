@@ -17,10 +17,6 @@ import org.hibernate.annotations.IndexColumn;
 				query = "SELECT f FROM Formulario f"
 	),
 		@NamedQuery(
-				name = "Formulario.DeUsuario", 
-				query = "SELECT f FROM Formulario f WHERE f.UsuarioPadre = :usuarioParam "
-	),
-		@NamedQuery(
 				name = "Formulario.Encuesta", 
 				query = "SELECT f FROM Formulario f WHERE f.encuesta = :usuarioParam "
 	)
@@ -49,9 +45,6 @@ public class Formulario implements Serializable {
 	private boolean IsInterface; 
 	@OneToMany(mappedBy="FormularioPadre",cascade= CascadeType.ALL)
 	private List<Seccion> Secciones;
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="fk_Usuario")
-	private Usuario UsuarioPadre; 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_Encuesta")
 	private Encuesta encuesta; 
@@ -100,13 +93,6 @@ public class Formulario implements Serializable {
 
 	public void setFavorito(boolean Favorito) {
 		this.Favorito = Favorito;
-	}
-	public Usuario getUsuarioPadre() {
-		return this.UsuarioPadre; 
-	}
-	
-	public void setUsuarioPadre(Usuario usuarioPadre) {
-		this.UsuarioPadre = usuarioPadre; 
 	}
 	public boolean isIsInterface() {
 		return IsInterface;

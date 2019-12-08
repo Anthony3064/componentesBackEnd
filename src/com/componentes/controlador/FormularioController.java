@@ -63,15 +63,15 @@ public class FormularioController {
 	}
 
 	/// mientras implementamos la api se van a usar estos 3
-	public List<Formulario> Get(Usuario usuario) {
-
-		try {
-			return _formularioCL.getFormulario(usuario);
-		} catch (Exception e) {
-			System.out.println(e.getLocalizedMessage());
-			return new ArrayList<Formulario>();
-		}
-
-	}
+//	public List<Formulario> Get(Usuario usuario) {
+//
+//		try {
+//			return _formularioCL.getFormulario(usuario);
+//		} catch (Exception e) {
+//			System.out.println(e.getLocalizedMessage());
+//			return new ArrayList<Formulario>();
+//		}
+//
+//	}
 
 }

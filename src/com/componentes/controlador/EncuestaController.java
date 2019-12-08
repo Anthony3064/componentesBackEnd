@@ -1,6 +1,10 @@
 package com.componentes.controlador;
 
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.TypedQuery;
 
 import com.componentes.dao.FormularioDAO;
 import com.componentes.entidades.Encuesta;
@@ -44,16 +48,30 @@ public class EncuestaController {
 	}
 
 	
-	public List<Formulario> Get() {
-		return null; 
-		
+	public List<Encuesta> Get() {
+		try {
+			return  _encuestaCL.GetAll();
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null; 
+		} 
+		 
 	}
-	///mientras implementamos la api se van a usar estos 3
-	public List<Formulario> Get(Usuario usuario) {
-		
-		
-		
-		return null; 
-		
+
+
+
+
+	public List<Encuesta> Get(Usuario usuario) {
+		try {
+			return _encuestaCL.GetAll(usuario);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null; 
+		} 
 	}
+	
+
+	
 }

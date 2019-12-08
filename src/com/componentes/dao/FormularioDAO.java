@@ -87,20 +87,20 @@ public class FormularioDAO extends Servicio {
 //	query.setParameter("nombreParam", "%Fde%");
 //	return query.getResultList();
 	
-	public List<Formulario> GetList(Usuario usuario) throws Exception {
-
-		try {
-			
-			this.startEntityManagerFactory();
-			this.em.getTransaction().begin();
-			return this.findAllSQLWithParam(usuario); 
-
-		} catch (Exception e) {
-			throw e; 
-		}finally {
-			this.stopEntityManagerFactory();
-		} 
-	}
+//	public List<Formulario> GetList(Usuario usuario) throws Exception {
+//
+//		try {
+//			
+//			this.startEntityManagerFactory();
+//			this.em.getTransaction().begin();
+//			return this.findAllSQLWithParam(usuario); 
+//
+//		} catch (Exception e) {
+//			throw e; 
+//		}finally {
+//			this.stopEntityManagerFactory();
+//		} 
+//	}
 	
 	public List<Formulario> buscarFormulariosUsuario(Usuario usuario){
 		
@@ -126,19 +126,19 @@ public class FormularioDAO extends Servicio {
 		
 	}
 	
-	public  List<Formulario> findAllSQLWithParam(Usuario usuario) throws Exception {
-		
-		TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findAllSQLWithParam", Usuario.class);
-		
-		query.setParameter("idParam", usuario.getId());
-		if(query.getResultList().size() > 0) {
-			
-			List<Formulario> lst = query.getResultList().get(0).GetFomurlarios(); 
-			return lst;
-		}
-		else
-			return new ArrayList<Formulario>(); 
-	}
+//	public  List<Formulario> findAllSQLWithParam(Usuario usuario) throws Exception {
+//		
+//		TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findAllSQLWithParam", Usuario.class);
+//		
+//		query.setParameter("idParam", usuario.getId());
+//		if(query.getResultList().size() > 0) {
+//			
+//			List<Formulario> lst = query.getResultList().get(0).GetFomurlarios(); 
+//			return lst;
+//		}
+//		else
+//			return new ArrayList<Formulario>(); 
+//	}
 	
 }
 

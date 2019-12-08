@@ -17,13 +17,13 @@ public class FormularioCL {
 
 	private FormularioDAO _formularioDAO = new FormularioDAO();  
 			
-	public List<Formulario> getFormulario(Usuario usuario) throws Exception{
-		if(usuario == null) {
-			throw new Exception("Usuario no valido"); 
-			//return new ArrayList<Formulario>(); 
-		}else
-		return _formularioDAO.GetList(usuario); 
-	}
+//	public List<Formulario> getFormulario(Usuario usuario) throws Exception{
+//		if(usuario == null) {
+//			throw new Exception("Usuario no valido"); 
+//			//return new ArrayList<Formulario>(); 
+//		}else
+//		return _formularioDAO.GetList(usuario); 
+//	}
 	
 	public void insertFormulario(Formulario formulario) throws Exception {
 		_formularioDAO.Insert(formulario);

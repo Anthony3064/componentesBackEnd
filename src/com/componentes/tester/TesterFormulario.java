@@ -27,9 +27,9 @@ public class TesterFormulario {
 
 	public static void main(String[] args) {
 
-		//InsertarFormulario();
+		InsertarFormulario();
 		//ListFormularioPorID(1);
-		 ListFormularios();
+		// ListFormularios();
 		// EditarFormulario();
 		//ListarFormularioPorUsuario(); 
 		
@@ -61,7 +61,6 @@ public class TesterFormulario {
 		List<Formulario> lst = GetDummyForms(u);
 
 		for (Formulario f : lst) {
-			f.setUsuarioPadre(u);
 			f.setIsInterface(true);
 			f.setFavorito(true);
 			_fController.Insert(f);
@@ -70,11 +69,11 @@ public class TesterFormulario {
 	}
 
 	public static Formulario ListFormularioPorID(int id) {
-		for (int i = 0; i < 1; i++) {
-			Formulario fm =  _fController.Get(id);
-			DibujarFormulario(fm);
-		}
-			return null; 
+		//for (int i = 0; i < 1; i++) {
+			return   _fController.Get(id);
+			//DibujarFormulario(fm);
+		//}
+			//return null; 
 	}
 
 	public static List<Formulario> ListFormularios() {
@@ -86,22 +85,22 @@ public class TesterFormulario {
 		return lst; 
 	}
 	
-	public static List<Formulario> ListarFormularioPorUsuario() {
-		UsuarioTester ut = new UsuarioTester();
-		Usuario u = ut.RecuperarUsuario();
-		List<Formulario> lst = _fController.Get(u); 
-		
-		for(Formulario f: lst) {
-			DibujarFormulario(f); 
-		}
-		return lst; 
-	}
+//	public static List<Formulario> ListarFormularioPorUsuario() {
+//		UsuarioTester ut = new UsuarioTester();
+//		Usuario u = ut.RecuperarUsuario();
+//		List<Formulario> lst = _fController.Get(u); 
+//		
+//		for(Formulario f: lst) {
+//			DibujarFormulario(f); 
+//		}
+//		return lst; 
+//	}
 	
 	public static void EditarFormulario() {
 		///Traemos toda la lista 
 		
 		int i = 0; 
-		for(Formulario f : ListarFormularioPorUsuario()) {
+		for(Formulario f : ListFormularios()) {
 			System.out.println("Actualizando nombre a "+f.getNombre());
 			f.GetSecciones().clear();
 			f.setNombre("Formulario de prueba"+ i++ +" - Editado");
@@ -109,8 +108,8 @@ public class TesterFormulario {
 			_fController.Update(f); 
 		}
 		///Volvemos a listar
-		//ListFormularios();
-		ListarFormularioPorUsuario(); 
+		ListFormularios();
+		//ListarFormularioPorUsuario(); 
 		
 	}
 
@@ -138,7 +137,6 @@ public class TesterFormulario {
 		for (int i = 0; i < 2; i++) {
 			Formulario frm = new Formulario();
 			frm.setNombre("formulario de prueba" + i);
-			frm.setUsuarioPadre(usurio);
 			// por cada formulario creado se agrega una lista de secciones
 			// frm.setId(i);
 			frm.SetSecciones(GetDummySeccion(frm));
