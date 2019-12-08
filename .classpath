@@ -6,7 +6,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Steve/Documents/Cursos U/hibernate_libs/mysql-connector-java-8.0.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
-	<classpathentry kind="lib" path="C:/Aplicaciones/Librerias/MySQL_libs/mysql-connector-java-8.0.16.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

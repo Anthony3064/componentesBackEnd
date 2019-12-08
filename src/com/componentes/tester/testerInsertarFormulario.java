@@ -4,88 +4,66 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.componentes.controlador.EncuestaController;
+import com.componentes.controlador.UsuarioController;
+import com.componentes.dao.EncuestaDAO;
 import com.componentes.dao.FormularioDAO;
 import com.componentes.dao.IDao;
 import com.componentes.dao.ItemDAO;
 import com.componentes.dao.SeccionDAO;
 import com.componentes.dao.UsuarioDAO;
 import com.componentes.entidades.EItem;
+import com.componentes.entidades.Encuesta;
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Item;
 import com.componentes.entidades.Seccion;
 import com.componentes.entidades.Usuario;
-import com.componentes.logica.UsuarioLog;
+import com.componentes.logica.UsuarioLG;
 
 public class testerInsertarFormulario {
 
 	public static void main(String[] args) {
-	
-
-			FormularioDAO fD = new FormularioDAO();
+			EncuestaController eCont = new EncuestaController(); 
+			UsuarioController uCont = new UsuarioController(); 
 			UsuarioDAO uD = new UsuarioDAO();
-			SeccionDAO sD = new SeccionDAO();
-			ItemDAO iD = new ItemDAO();
-			/*
-			Usuario u = new Usuario();
+			EncuestaDAO eD = new EncuestaDAO() ; 
+			Usuario us;
+			try {
+				us = (Usuario)uD.login("Kesdn", "1234");
 			
-			u = (Usuario)uD.login("Juan", "123");
+			System.out.println(us.getId());	
 			
-			for (Formulario f : fD.buscarFormulariosUsuario(u)) {
-				f.GetSecciones().size();
+			//Hacemos el  forumulario
+			List<Encuesta> lst = GetEncuestasDummy(us); 
+			
+			for(Encuesta en : lst) {
 				
-				System.out.println(f.getNombre());
-				
-				for (Seccion s : f.GetSecciones()) {
-					
-					System.out.println(s.getPregunta());
-					
-					for (Item i : iD.itemsEnSecciones(s)) {
-						
-						System.out.println(i.getDefaultName());
-					
-					}
-					
-				}
-				
+				eCont.Insert(en);
 			}
-			*/
-			
-			List<Formulario> formularios = new ArrayList<>();
-			List<Seccion> secciones = new ArrayList<>();
-			List<Item> items = new ArrayList<>();
-					
-			Usuario us = (Usuario)uD.login("Anthony3064", "89603146");
-			
-			Formulario f = new Formulario();
-			f.setNombre("Prueba guardar");
-			f.setFavorito(false);
-		
-			Seccion s = new Seccion();
-			s.setFormularioPadre(f);
-			s.setPregunta("lhglkhgkaglhkdhgjaksdg");
-		
-			for	(int i = 0 ; i < 4 ; i++) {
-				
-				Item it = new Item();
-				it.setSeccion(s);
-				it.setDefaultName("Opcion " + i);
-				it.setTipoDato(EItem.RadioButton);
-				items.add(it);
-			}
-			
-			s.SetItem(items);
-			
-			secciones.add(s);
-			
-			f.SetSecciones(secciones);
-			
-			formularios.add(f);
 
-			
-			UsuarioLog p = new UsuarioLog();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+}
 	
-			p.guardarFormularioUsuario(formularios, us);
-	}
+	public static List<Encuesta> GetEncuestasDummy(Usuario usuario){
+		///Hacemos la encu
+		ArrayList<Encuesta> retorno = new ArrayList<Encuesta>(); 
+		List<Formulario> forms = GetDummyForms(usuario); 
+		
+		for(Formulario frm : forms) {
+			
+			Encuesta _encuesta = new Encuesta(); 
+			_encuesta.setFrmScaffolding(frm);
+			frm.setIsInterface(true);
+			
+			retorno.add(_encuesta); 
+		}
+		
+		return retorno; 
+		
+	} 
 	
 	public static List<Formulario> GetDummyForms(Usuario usurio){
 		
@@ -94,7 +72,7 @@ public class testerInsertarFormulario {
 		System.out.print("Creando la lista de formulario");
 		
 		
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < 10; i++) {
 			Formulario frm = new Formulario(); 
 			frm.setNombre("formulario de prueba"+i);
 			frm.setUsuarioPadre(usurio);

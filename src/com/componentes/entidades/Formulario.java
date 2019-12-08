@@ -9,10 +9,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.IndexColumn;
 
-/**
- * Entity implementation class for Entity: Formulario
- *
- */
+
 @Entity
 @NamedQueries(value = {
 		@NamedQuery(
@@ -22,6 +19,10 @@ import org.hibernate.annotations.IndexColumn;
 		@NamedQuery(
 				name = "Formulario.DeUsuario", 
 				query = "SELECT f FROM Formulario f WHERE f.UsuarioPadre = :usuarioParam "
+	),
+		@NamedQuery(
+				name = "Formulario.Encuesta", 
+				query = "SELECT f FROM Formulario f WHERE f.encuesta = :usuarioParam "
 	)
 })
 
@@ -39,30 +40,35 @@ import org.hibernate.annotations.IndexColumn;
 
 public class Formulario implements Serializable {
 
-	   
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	private String Nombre;
 	private boolean Favorito;
+	///Si con el se van aa contruir respuestas
+	private boolean IsInterface; 
 	@OneToMany(mappedBy="FormularioPadre",cascade= CascadeType.ALL)
-	//@JoinColumn(name="IdFormulario")
-	//@IndexColumn(name="Id")
 	private List<Seccion> Secciones;
-	
-    //Usuario
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="fk_Usuario")
 	private Usuario UsuarioPadre; 
-	
-
-	
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_Encuesta")
+	private Encuesta encuesta; 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	public Formulario() {
 		super();
 	}   
+	
+	public void setEncuesta(Encuesta encuesta) {
+		this.encuesta = encuesta; 
+	}
+	public Encuesta getEncuesta() {
+		return this.encuesta; 
+	}
+	
 	public List<Seccion> GetSecciones(){
 		return this.Secciones;
 	}
@@ -98,5 +104,12 @@ public class Formulario implements Serializable {
 	public void setUsuarioPadre(Usuario usuarioPadre) {
 		this.UsuarioPadre = usuarioPadre; 
 	}
+	public boolean isIsInterface() {
+		return IsInterface;
+	}
+	public void setIsInterface(boolean isInterface) {
+		IsInterface = isInterface;
+	}
+
 	
 }

@@ -1,19 +1,23 @@
 package com.componentes.controlador;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.componentes.dao.FormularioDAO;
+import com.componentes.entidades.Encuesta;
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
-import com.componentes.logica.FormularioCL;
+import com.componentes.logica.EncuestaCL;
 
-public class FormularioController  {
-	private FormularioCL formularioCL = new FormularioCL();
-
-	public void Insert(Formulario Formulario) {
-		///Revisar esto 
-      formularioCL.insertFormulario(Formulario);
+public class EncuestaController {
+	
+	private EncuestaCL _encuestaCL = new EncuestaCL(); 
+	
+	public void Insert(Encuesta encuesta) {
+		try {
+			_encuestaCL.Insertar(encuesta);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 				
 	}
 	
@@ -34,7 +38,7 @@ public class FormularioController  {
 	
 	public Formulario Get(int id) {
 	
-		return formularioCL.Get(id);
+		return null; 
 		
 	}
 
@@ -50,27 +54,7 @@ public class FormularioController  {
 		
 		
 		
-		return (List<Formulario>) formularioCL.getFormulario(usuario); 
+		return null; 
 		
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

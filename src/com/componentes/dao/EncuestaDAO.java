@@ -3,23 +3,25 @@ package com.componentes.dao;
 import java.util.List;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+
+import com.componentes.entidades.Encuesta;
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
 
 
-public class FormularioDAO extends Servicio implements IDao {
+public class EncuestaDAO extends Servicio implements IDao {
 
 	
 	@Override
 	public void Insert(Object t) {
 		
-		Formulario fr = new Formulario();
+		Encuesta encuesta = new Encuesta();
 		
 		this.startEntityManagerFactory();
 		
 		this.em.getTransaction().begin();
 		
-		this.em.persist(fr);
+		this.em.persist(t);
 		
 		this.em.getTransaction().commit();
 		

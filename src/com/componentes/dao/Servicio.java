@@ -29,7 +29,7 @@ public abstract class Servicio {
 			if (entityManagerFactory.isOpen()) {
 				try {
 					entityManagerFactory.close();
-					System.out.println("Se cerro");
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

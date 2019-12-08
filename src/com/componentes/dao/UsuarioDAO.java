@@ -3,42 +3,49 @@ package com.componentes.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+
+import org.hibernate.exception.ConstraintViolationException;
 
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
 
-public class UsuarioDAO<Usuario> extends Servicio implements IDao<Usuario> {
+public class UsuarioDAO extends Servicio{
 
 	
-	@Override
-	public void Insert(Usuario t) { 
-		
-		this.startEntityManagerFactory();
-		this.em.getTransaction().begin();
-		
-		this.em.persist((Usuario)t);
-		
-		this.em.getTransaction().commit();
-		this.stopEntityManagerFactory();
-		
+	public void Insert(Usuario t) throws PersistenceException,Exception { 
+		try {
+			
+			this.startEntityManagerFactory();
+			this.em.getTransaction().begin();
+			this.em.persist((Usuario)t);
+			this.em.getTransaction().commit();
+			
+		}catch(PersistenceException novalidfild) {
+			throw novalidfild; 
+		}
+		catch (Exception e) {
+			throw e; 
+		}finally{
+			
+			this.stopEntityManagerFactory();
+		}
 	}
 
-	@Override
-	public void Update(Usuario t) {
+	
+	public void Update(Usuario t)throws Exception {
 		
 		try {
 			this.startEntityManagerFactory();
 			em.getTransaction().begin();
-			
 			em.merge((Usuario)t);
-			
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.println("Ha ocurrido un erro.");
+			throw e; 
 		}finally {
-			
 			this.stopEntityManagerFactory();
 		}
 		
@@ -46,42 +53,45 @@ public class UsuarioDAO<Usuario> extends Servicio implements IDao<Usuario> {
 	}
 	
 
-	@Override
+	
 	public void Delete(Usuario t) {
 		
 	}
 
-	@Override
-	public Usuario Get(int id) {
-		
-		return null;
-	}
 	
-	public Usuario login(String nombre, String contrasenna){
-		Usuario usuario = null;
+	public Usuario Get(int id) throws Exception {
 		
 		try {
+
 		this.startEntityManagerFactory();	
-		String parametro = nombre;
-		String parametro2 = contrasenna;
 		
-		usuario = (Usuario)em.createNamedQuery("Usuario.Logear").setParameter("nombreParam", parametro).setParameter("constraniaParam", parametro2).getSingleResult();
-		
-		if	(usuario != null) {
-			
-			return usuario;
-			
-		}
+		return (Usuario)em.createNamedQuery("Usuario.GetById").setParameter("idParam", id).getSingleResult();
+
 		}catch (Exception e) {
-			System.out.println("No hay registro");
-		}finally {
+			throw e;
+		}
+		finally {
 			
 			this.stopEntityManagerFactory();
-			
 		} 
+	}
+	
+	public Usuario login(String correo, String contrasenna) throws Exception{
 		
+		try {
+
+		this.startEntityManagerFactory();	
 		
-		return usuario;	
+		return (Usuario)em.createNamedQuery("Usuario.Logear").setParameter("correoParam", correo).setParameter("constraniaParam", contrasenna).getSingleResult();
+
+		}catch (Exception e) {
+			throw e;
+		}
+		finally {
+			
+			this.stopEntityManagerFactory();
+		} 
+			
 	}
 	
 	public Usuario getUsuario(Usuario u) {
@@ -89,6 +99,7 @@ public class UsuarioDAO<Usuario> extends Servicio implements IDao<Usuario> {
 		Usuario usuario = null;
 		
 		try {
+			
 			this.startEntityManagerFactory();
 			
 			usuario = (Usuario)em.createNamedQuery("Usuario.GetUsuario").setParameter("usuarioParam", u).getSingleResult();
@@ -109,7 +120,7 @@ public class UsuarioDAO<Usuario> extends Servicio implements IDao<Usuario> {
 		return usuario;
 	}
 	
-	@Override
+	
 	public List<Usuario> GetList() {
 		
 		this.startEntityManagerFactory();
@@ -129,14 +140,9 @@ public class UsuarioDAO<Usuario> extends Servicio implements IDao<Usuario> {
 	
 		
 		this.startEntityManagerFactory();
-		
 		this.em.getTransaction().begin();
-		
-
 		TypedQuery<Usuario> query = (TypedQuery<Usuario>)em.createNamedQuery("Usuario.findPK", u.getClass());
 		this.stopEntityManagerFactory();
-
-		
 		return query.getResultList();
 
 	}

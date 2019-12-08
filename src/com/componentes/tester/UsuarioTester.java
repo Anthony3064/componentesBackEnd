@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 
+import com.componentes.controlador.UsuarioController;
 import com.componentes.dao.FormularioDAO;
 import com.componentes.dao.ItemDAO;
 import com.componentes.dao.SeccionDAO;
@@ -15,117 +16,60 @@ import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Item;
 import com.componentes.entidades.Seccion;
 import com.componentes.entidades.Usuario;
-import com.ulatina.entidad.DemoPersona;
+
 
 public class UsuarioTester {
 
-
-	private static EntityManagerFactory entityManagerFactory = null;
-	private static EntityManager em = null;
-
-
+	static UsuarioController _ucontroller = new  UsuarioController(); 
 	public static void main(String[] args) {
 			
-			/*
-			Usuario u = new Usuario();
-			u.setNombre("Anthony");
-			u.setConstrania("qwop123!");
-			u.setCorreo("cotoandres2018@gmail.com");
-			
-			
-			em.getTransaction().begin();
-			
-			em.persist(u);
-			
-			em.getTransaction().commit();
+		//RegistrarPersona(); 
+		//RecuperarUsuario(); 
+		//Login(); 
+		//Edit();
+		GetAll();  
+	}
+	
+	public static void RegistrarPersona() {
+		Usuario user = new Usuario(); 
+		user.setNombre("kenneth");
+		user.setCorreo("kenaguilar.steve@gmail.com");
+		user.setConstrania("1234");
+		_ucontroller.Insert(user);
+	}
+	public static void RecuperarUsuario() {
 		
-			*/
-/*			
-			Usuario us = new Usuario();
-			
-			System.out.println(" " + findPK().getNombre());
+		Usuario user = _ucontroller.Get(1); 
+		System.out.println(user.getCorreo());
+		System.out.println(user.getNombre());
+	}
+	public static void Login() {
+		Usuario user = _ucontroller.Login("kenaguilar.steve@gmail.com", "1234");
+		System.out.println(user.getNombre());
+		
+	}
+	public static void Edit() {
+		Usuario user = _ucontroller.Get(1); 
+		System.out.println(user.getCorreo());
+		System.out.println(user.getNombre());
+		
+		System.out.println("Editando....");
+		user.setNombre("steve");
+		user.setCorreo("steve@gmail.com");
+		user.setConstrania("abc"); 
+		
+		_ucontroller.Update(user);
 
-			System.out.println(" " + findPK().getConstrania());
-			
-			UsuarioDAO<Usuario> ud = new UsuarioDAO<Usuario>();
-			
-			System.out.println(ud.getUsuario(1, us).getNombre());
-			
-
-			System.out.println(ud.getUsuario(1, us).getConstrania());
-	*/
-			
-			UsuarioDAO uDao = new UsuarioDAO();
-			SeccionDAO sD = new SeccionDAO();
-			ItemDAO iD = new ItemDAO();
-			
-			FormularioDAO fD = new FormularioDAO();
-			
-			for (Formulario frm : fD.buscarFormulariosUsuario(((Usuario)uDao.login("Anthony3064", "123456")))) {
-				System.out.println(frm.getNombre());
-			
-				for (Seccion s : frm.GetSecciones()) {
-					System.out.println(s.getPregunta());
-					for (Item item : s.getItem()) {
-						System.out.println(item.getDefaultName());
-					}
-				}
-				
-			}
-			
-			fD.stopEntityManagerFactory();
-			
-		
-			System.out.println(fD.GetList());
-	
-			
+		RecuperarUsuario(); 
 	}
-	
-	public static Usuario findPK() throws Exception {
-		Usuario usuario = (Usuario)em.createNamedQuery("Usuario.findPK").
-											setParameter("idParam", new Integer("1")).
-											getSingleResult();
-		return usuario;
-	}
-	
-public static Usuario buscarPersona() throws Exception{
+	public static void GetAll() {
 		
-		String parametro = JOptionPane.showInputDialog("Nombre");
-		String parametro2 = JOptionPane.showInputDialog("Contrasenna");
+		List<Usuario> lst = _ucontroller.Get();  
 		
-		Usuario usuario = (Usuario)em.createNamedQuery("Usuario.Logear").setParameter("nombreParam", parametro).setParameter("constraniaParam", parametro2).getSingleResult();
-		return usuario;
-		
-	}
-	
-	
-	public static void startEntityManagerFactory() {
-		if (entityManagerFactory == null) {
-			try {
-				entityManagerFactory = Persistence
-						.createEntityManagerFactory("Componentes");
-				em = entityManagerFactory.createEntityManager();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		for(Usuario user : lst) {
+			System.out.println(user.toString()); 
 		}
 	}
-
-	public static void stopEntityManagerFactory() {
-		if (entityManagerFactory != null) {
-			if (entityManagerFactory.isOpen()) {
-				System.out.println("Si esta");
-				try {
-					entityManagerFactory.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			em.close();
-			entityManagerFactory = null;
-		}
-	}
-   
    
 }
 

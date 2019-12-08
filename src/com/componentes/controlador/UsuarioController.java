@@ -2,40 +2,89 @@ package com.componentes.controlador;
 
 import java.util.List;
 
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
+
+import org.hibernate.exception.ConstraintViolationException;
+
 import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
+import com.componentes.logica.UsuarioLG;
 
-public class UsuarioController<Usuario> implements IController<Usuario> {
+public class UsuarioController {
 
-	@Override
+	private UsuarioLG _usuarioLG = new UsuarioLG(); 
+	
+	
 	public void Insert(Usuario t) {
-		// TODO Auto-generated method stub
-		
+		try {
+			_usuarioLG.Insert(t);
+		}catch(PersistenceException MailRepet) {
+			//Error causado por llave repetida, si debugeas la excepcion se puede ser el 
+			//Mensaje de error pero no lo pude sacar, la idea es poder recuperarlo
+			System.out.println(MailRepet.getCause());
+		} catch (Exception e) {
+			//Redirect to error page
+			System.out.println(e.getMessage());
+		}
 	}
-
-	@Override
-	public void Update(int id) {
-		// TODO Auto-generated method stub
+	public Usuario Login(String correo, String pass) {
+		
+		try {
+			Usuario usuario = _usuarioLG.Login(correo, pass);
+			if(usuario == null) {
+				//Return no user message
+				return null; 
+			}else {
+				return usuario; 
+			}
+		} catch (NonUniqueResultException nofound) {
+			//Redirect to not found user
+			return null; 
+		}  catch(Exception ex) {
+			//redirect to error page
+			return null; 
+		}
+		 
 		
 	}
 	
 	
-	@Override
+	public void Update(Usuario usuario) {
+		
+		try {
+			_usuarioLG.Update(usuario);
+		} catch (Exception e) {
+			// Redirect to error page
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 	public void Delete(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public Usuario Get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try {
+			return _usuarioLG.GetBbyId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null; 
+		}
+		
 	}
 
-	@Override
+	
 	public List<Usuario> Get() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return _usuarioLG.GetAll(); 
 	}
 
 

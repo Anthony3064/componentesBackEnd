@@ -21,7 +21,7 @@ public class testerListarFormulario {
 		
 		UsuarioDAO uDao = new UsuarioDAO();
 		
-		Usuario u = (Usuario)uDao.login("Anthony3064", "89603146");
+		Usuario u = (Usuario)uDao.login("ken", "123456");
 		
 		List<Formulario> lista = new ArrayList<>();
 		

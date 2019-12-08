@@ -16,7 +16,10 @@ import javax.persistence.*;
 		
 		@NamedQuery(
 				name = "Usuario.Logear", 
-				query = "SELECT u FROM Usuario u WHERE u.Nombre = :nombreParam AND u.Constrania = :constraniaParam"),
+				query = "SELECT u FROM Usuario u WHERE u.Correo = :correoParam AND u.Constrania = :constraniaParam"),
+		@NamedQuery(
+				name = "Usuario.GetById", 
+				query = "SELECT u FROM Usuario u WHERE u.Id = :idParam"),
 		@NamedQuery(
 				name = "Usuario.GetAll", 
 				query = "SELECT u FROM Usuario u"),
@@ -42,6 +45,7 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	private String Nombre;
+	@Column(unique = true)
 	private String Correo;
 	private String Constrania;
 	        
@@ -52,9 +56,18 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
+	
+	
+	
 	public Usuario() {
 		super();
 	}   
+	
+	public String toString() {
+		return this.Nombre+" "+ this.Correo; 
+		
+	}
+	
 	public Integer getId() {
 		return this.Id;
 	}
