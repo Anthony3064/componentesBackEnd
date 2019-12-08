@@ -62,6 +62,10 @@ public class Formulario implements Serializable {
 		super();
 	}   
 	
+	public String toString() {
+		return Nombre; 
+	}
+	
 	public void setEncuesta(Encuesta encuesta) {
 		this.encuesta = encuesta; 
 	}

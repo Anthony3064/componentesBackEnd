@@ -27,7 +27,7 @@ public class UsuarioTester {
 		//RecuperarUsuario(); 
 		//Login(); 
 		//Edit();
-		GetAll();  
+		//GetAll();  
 	}
 	
 	public static void RegistrarPersona() {
@@ -37,11 +37,12 @@ public class UsuarioTester {
 		user.setConstrania("1234");
 		_ucontroller.Insert(user);
 	}
-	public static void RecuperarUsuario() {
+	public static Usuario RecuperarUsuario() {
 		
-		Usuario user = _ucontroller.Get(1); 
+		Usuario user = _ucontroller.Get(2); 
 		System.out.println(user.getCorreo());
 		System.out.println(user.getNombre());
+		return user; 
 	}
 	public static void Login() {
 		Usuario user = _ucontroller.Login("kenaguilar.steve@gmail.com", "1234");
@@ -49,9 +50,7 @@ public class UsuarioTester {
 		
 	}
 	public static void Edit() {
-		Usuario user = _ucontroller.Get(1); 
-		System.out.println(user.getCorreo());
-		System.out.println(user.getNombre());
+		Usuario user = RecuperarUsuario();
 		
 		System.out.println("Editando....");
 		user.setNombre("steve");

@@ -7,62 +7,78 @@ import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
 
 
-public class FormularioDAO extends Servicio implements IDao {
+public class FormularioDAO extends Servicio {
 
 	
-	@Override
-	public void Insert(Object t) {
+	
+	public void Insert(Formulario formulario) throws Exception  {
 		
-		Formulario fr = new Formulario();
-		
-		this.startEntityManagerFactory();
-		
-		this.em.getTransaction().begin();
-		
-		this.em.persist(fr);
-		
-		this.em.getTransaction().commit();
-		
-		this.stopEntityManagerFactory();
-		
+		try {
+			
+			this.startEntityManagerFactory();
+			this.em.getTransaction().begin();
+			this.em.persist(formulario);
+			this.em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
 	}
 	
-	@Override
-	public void Update(Object t) {
-		// TODO Auto-generated method stub
+	
+	public void Update(Formulario t) throws Exception {
 		
+		try {
+			this.startEntityManagerFactory();
+			em.getTransaction().begin();
+			em.merge((Formulario)t);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
 	}
 
-	@Override
+	
 	public void Delete(Object t) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public Formulario Get(int id) {
-		
+	
+	public Formulario Get(int id) throws Exception {
+		try {
+			
 		this.startEntityManagerFactory();
 		Formulario formLeido = em.find(Formulario.class, id);
-		this.stopEntityManagerFactory();
 		return formLeido;
+		
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
 		
 	}
 
-	@Override
-	public List<Formulario> GetList() {
+	
+	public List<Formulario> GetAll() throws Exception{
 		
-		
+		try {
+			
 		this.startEntityManagerFactory();
-		
 		this.em.getTransaction().begin();
-		
-
 		TypedQuery<Formulario> query = em.createNamedQuery("Formulario.findPK", Formulario.class);
-		this.stopEntityManagerFactory();
-
-		
 		return query.getResultList();
+
+		} catch (Exception e) {
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
+		}
 		
 	}
 	
@@ -71,23 +87,19 @@ public class FormularioDAO extends Servicio implements IDao {
 //	query.setParameter("nombreParam", "%Fde%");
 //	return query.getResultList();
 	
-	public List<Formulario> GetList(Usuario usuario) {
+	public List<Formulario> GetList(Usuario usuario) throws Exception {
 
-		List<Formulario> retorno = new ArrayList<>(); 
-		
-		this.startEntityManagerFactory();
-	    this.em.getTransaction().begin();
-		
 		try {
-			retorno = this.findAllSQLWithParam(usuario);
+			
+			this.startEntityManagerFactory();
+			this.em.getTransaction().begin();
+			return this.findAllSQLWithParam(usuario); 
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e; 
+		}finally {
+			this.stopEntityManagerFactory();
 		} 
-	    
-		this.stopEntityManagerFactory();
-
-		return retorno; 
 	}
 	
 	public List<Formulario> buscarFormulariosUsuario(Usuario usuario){

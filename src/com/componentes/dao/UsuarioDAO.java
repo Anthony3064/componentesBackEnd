@@ -48,8 +48,6 @@ public class UsuarioDAO extends Servicio{
 		}finally {
 			this.stopEntityManagerFactory();
 		}
-		
-		
 	}
 	
 

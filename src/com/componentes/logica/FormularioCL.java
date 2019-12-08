@@ -15,25 +15,36 @@ import com.componentes.entidades.Usuario;
 
 public class FormularioCL {
 
-	//Va la logica de negocio
-	private FormularioDAO formDao = new FormularioDAO();  
+	private FormularioDAO _formularioDAO = new FormularioDAO();  
 			
-	public List<Formulario> getFormulario(Usuario usuario){
+	public List<Formulario> getFormulario(Usuario usuario) throws Exception{
 		if(usuario == null) {
-			return new ArrayList<Formulario>(); 
+			throw new Exception("Usuario no valido"); 
+			//return new ArrayList<Formulario>(); 
 		}else
-		return formDao.GetList(usuario); 
+		return _formularioDAO.GetList(usuario); 
 	}
 	
-	public void insertFormulario(Formulario formulario) {
-		formDao.Insert(formulario);
+	public void insertFormulario(Formulario formulario) throws Exception {
+		_formularioDAO.Insert(formulario);
 	}
-	public Formulario Get(int id) {
 	
-		return formDao.Get(id); 
+	public Formulario Get(int id) throws Exception {
+		Formulario fomulario =_formularioDAO.Get(id); 
+
+		if(fomulario == null) {
+			throw new Exception("Formulario no encontrado"); 
+		}
+		return  fomulario; 
 		
 	}
 
+	public List<Formulario> GetAll() throws Exception {
+		return _formularioDAO.GetAll(); 
+	}
+	public void Update(Formulario formulario) throws Exception {
+		_formularioDAO.Update(formulario);
+	}
 	
 
 }

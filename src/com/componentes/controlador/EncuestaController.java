@@ -44,9 +44,7 @@ public class EncuestaController {
 
 	
 	public List<Formulario> Get() {
-		FormularioDAO formularioDao = new FormularioDAO();
-		
-		return (List<Formulario>) formularioDao.GetList(); 
+		return null; 
 		
 	}
 	///mientras implementamos la api se van a usar estos 3
