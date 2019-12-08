@@ -21,15 +21,15 @@ import com.componentes.entidades.Seccion;
 import com.componentes.entidades.Usuario;
 import com.componentes.logica.UsuarioLG;
 
-public class testerInsertarFormulario {
+public class TesterFormulario {
 
 	static FormularioController _fController = new FormularioController();
 
 	public static void main(String[] args) {
 
-		// InsertarFormulario();
-		// ListFormularioPorID();
-		// ListFormularios();
+		//InsertarFormulario();
+		//ListFormularioPorID(1);
+		 ListFormularios();
 		// EditarFormulario();
 		//ListarFormularioPorUsuario(); 
 		
@@ -69,11 +69,12 @@ public class testerInsertarFormulario {
 		}
 	}
 
-	public static void ListFormularioPorID() {
-		for (int i = 0; i < 1000; i++) {
-			Formulario fm = _fController.Get(i);
+	public static Formulario ListFormularioPorID(int id) {
+		for (int i = 0; i < 1; i++) {
+			Formulario fm =  _fController.Get(id);
 			DibujarFormulario(fm);
 		}
+			return null; 
 	}
 
 	public static List<Formulario> ListFormularios() {
@@ -114,6 +115,9 @@ public class testerInsertarFormulario {
 	}
 
 	public static void DibujarFormulario(Formulario formulario) {
+		if(formulario.GetSecciones() == null) {
+			return; 
+		}
 		System.out.println("");
 		System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		System.out.println(formulario.toString());

@@ -13,6 +13,7 @@ public class EncuestaController {
 	private EncuestaCL _encuestaCL = new EncuestaCL(); 
 	
 	public void Insert(Encuesta encuesta) {
+		
 		try {
 			_encuestaCL.Insertar(encuesta);
 		} catch (Exception e) {

@@ -23,7 +23,7 @@ public class UsuarioTester {
 	static UsuarioController _ucontroller = new  UsuarioController(); 
 	public static void main(String[] args) {
 			
-		//RegistrarPersona(); 
+		RegistrarPersona(); 
 		//RecuperarUsuario(); 
 		//Login(); 
 		//Edit();
@@ -39,7 +39,7 @@ public class UsuarioTester {
 	}
 	public static Usuario RecuperarUsuario() {
 		
-		Usuario user = _ucontroller.Get(2); 
+		Usuario user = _ucontroller.Get(1); 
 		System.out.println(user.getCorreo());
 		System.out.println(user.getNombre());
 		return user; 
