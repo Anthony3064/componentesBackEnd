@@ -91,6 +91,19 @@ public class EncuestaDAO extends Servicio{
 		}
 	}
 	
+	public Encuesta encuestaPorId(int id) {
+		
+		this.startEntityManagerFactory();
+		Encuesta encuesta = null;
+		
+		TypedQuery<Encuesta> query = em.createNamedQuery("Formulario.BuscarFormulario", Encuesta.class).setParameter("idParam",id );
+		encuesta = (Encuesta)query.getSingleResult();
+		
+		this.stopEntityManagerFactory();
+		
+		return encuesta;
+	}
+	
 	public  List<Encuesta> findAllSQLWithParam(Usuario usuario) throws Exception {
 	
 	TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findAllSQLWithParam", Usuario.class);

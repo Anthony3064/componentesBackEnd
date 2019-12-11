@@ -15,7 +15,6 @@ public class UsuarioController {
 
 	private UsuarioLG _usuarioLG = new UsuarioLG(); 
 	
-	
 	public void Insert(Usuario t) {
 		try {
 			_usuarioLG.Insert(t);
@@ -28,10 +27,10 @@ public class UsuarioController {
 			System.out.println(e.getMessage());
 		}
 	}
-	public Usuario Login(String correo, String pass) {
+	public Usuario Login(String nombre, String pass) {
 		
 		try {
-			Usuario usuario = _usuarioLG.Login(correo, pass);
+			Usuario usuario = _usuarioLG.Login(nombre, pass);
 			if(usuario == null) {
 				//Return no user message
 				return null; 

@@ -16,7 +16,7 @@ import javax.persistence.*;
 		
 		@NamedQuery(
 				name = "Usuario.Logear", 
-				query = "SELECT u FROM Usuario u WHERE u.Correo = :correoParam AND u.Constrania = :constraniaParam"),
+				query = "SELECT u FROM Usuario u WHERE u.Nombre = :nombreParam AND u.Constrania = :constraniaParam"),
 		@NamedQuery(
 				name = "Usuario.GetById", 
 				query = "SELECT u FROM Usuario u WHERE u.Id = :idParam"),

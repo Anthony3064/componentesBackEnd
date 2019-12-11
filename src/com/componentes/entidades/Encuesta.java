@@ -29,7 +29,10 @@ import javax.persistence.OneToOne;
 	),@NamedQuery(
 				name = "Formulario.DeUsuario", 
 				query = "SELECT f FROM Encuesta f WHERE f.UsuarioPadre = :usuarioParam "
-	)
+	),@NamedQuery(
+			name = "Formulario.BuscarFormulario", 
+			query = "SELECT f FROM Encuesta f WHERE f.Id = :idParam "
+)
 })
 
 

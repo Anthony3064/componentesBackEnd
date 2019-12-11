@@ -28,6 +28,17 @@ public class UsuarioTester {
 		//Login(); 
 		//Edit();
 		//GetAll();  
+		
+		
+		
+		Usuario u = new Usuario();
+		u.setNombre("Anthony");
+		u.setCorreo("anthonyestiven3064@gmail.com");
+		u.setConstrania("123456");
+		_ucontroller.Insert(u);
+		
+		System.out.println(u.getCorreo());
+		
 	}
 	
 	public static void RegistrarPersona() {

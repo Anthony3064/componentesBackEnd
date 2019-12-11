@@ -73,13 +73,13 @@ public class UsuarioDAO extends Servicio{
 		} 
 	}
 	
-	public Usuario login(String correo, String contrasenna) throws Exception{
+	public Usuario login(String nombre, String contrasenna) throws Exception{
 		
 		try {
 
 		this.startEntityManagerFactory();	
 		
-		return (Usuario)em.createNamedQuery("Usuario.Logear").setParameter("correoParam", correo).setParameter("constraniaParam", contrasenna).getSingleResult();
+		return (Usuario)em.createNamedQuery("Usuario.Logear").setParameter("nombreParam", nombre).setParameter("constraniaParam", contrasenna).getSingleResult();
 
 		}catch (Exception e) {
 			throw e;

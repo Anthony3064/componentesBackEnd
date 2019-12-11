@@ -10,6 +10,7 @@ public class UsuarioLG {
 
 	UsuarioDAO _usuarioDAO = new UsuarioDAO();
 //Verificacion.VerificarString(usuario.getCorreo())
+	
 	public void Insert(Usuario usuario) throws Exception {
 		/// Verificar los atributos del usuario
 		if (!Verificacion.VerificarString(usuario.getNombre())) {

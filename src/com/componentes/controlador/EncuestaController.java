@@ -44,7 +44,14 @@ public class EncuestaController {
 	
 	public Encuesta Get(int id) {
 		
-		return null; 
+		Encuesta encuesta = null;
+		
+		try {
+			encuesta = _encuestaCL.encuestaPorId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return encuesta; 
 		
 	}
 

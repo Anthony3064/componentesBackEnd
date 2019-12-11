@@ -32,4 +32,9 @@ public class EncuestaCL {
 	public void Update(Encuesta encuesta) throws Exception {
 		_encuestaDAO.Update(encuesta);
 	}
+	
+	public Encuesta encuestaPorId(int idEncuesta) throws Exception{
+		return _encuestaDAO.encuestaPorId(idEncuesta);
+	}
+	
 }
