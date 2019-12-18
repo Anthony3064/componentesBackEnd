@@ -57,6 +57,13 @@ public class EncuestaDAO extends Servicio{
 		return formLeido;
 		
 	}
+	
+	public Encuesta encuestaPorFrmScaffolding(Formulario form) {
+		this.startEntityManagerFactory();
+		Encuesta encuesta = em.createNamedQuery("Formulario.BuscarFormularioConFormulario",Encuesta.class).setParameter("idFrmScaffolding", form).getSingleResult();
+		this.stopEntityManagerFactory();
+		return encuesta;
+	}
 
 	
 	public List<Encuesta> GetList() throws Exception{

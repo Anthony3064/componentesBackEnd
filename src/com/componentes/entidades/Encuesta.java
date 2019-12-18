@@ -32,7 +32,11 @@ import javax.persistence.OneToOne;
 	),@NamedQuery(
 			name = "Formulario.BuscarFormulario", 
 			query = "SELECT f FROM Encuesta f WHERE f.Id = :idParam "
-)
+),
+		@NamedQuery(
+				name = "Formulario.BuscarFormularioConFormulario", 
+				query = "SELECT f FROM Encuesta f WHERE f.FrmScaffolding = :idFrmScaffolding "
+	) 
 })
 
 

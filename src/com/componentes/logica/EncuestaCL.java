@@ -3,6 +3,7 @@ package com.componentes.logica;
 import java.util.List;
 import com.componentes.dao.EncuestaDAO;
 import com.componentes.entidades.Encuesta;
+import com.componentes.entidades.Formulario;
 import com.componentes.entidades.Usuario;
 
 public class EncuestaCL {
@@ -35,6 +36,11 @@ public class EncuestaCL {
 	
 	public Encuesta encuestaPorId(int idEncuesta) throws Exception{
 		return _encuestaDAO.encuestaPorId(idEncuesta);
+	}
+	
+	public Encuesta encuestaPorFrmScaffolding(Formulario frmScaffolding) {
+		return _encuestaDAO.encuestaPorFrmScaffolding(frmScaffolding);
+		
 	}
 	
 }

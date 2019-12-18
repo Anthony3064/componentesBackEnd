@@ -41,7 +41,18 @@ public class EncuestaController {
 		
 	}
 
-	
+	public Encuesta get(Formulario frmScaffolding) {
+		Encuesta encuesta = null;
+		
+		try {
+			encuesta = _encuestaCL.encuestaPorFrmScaffolding(frmScaffolding);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return encuesta;
+	}
 	public Encuesta Get(int id) {
 		
 		Encuesta encuesta = null;
