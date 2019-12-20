@@ -53,7 +53,7 @@ public class EncuestaDAO extends Servicio{
 		
 		this.startEntityManagerFactory();
 		Formulario formLeido = em.find(Formulario.class, id);
-		this.stopEntityManagerFactory();
+		//this.stopEntityManagerFactory();
 		return formLeido;
 		
 	}
@@ -61,7 +61,7 @@ public class EncuestaDAO extends Servicio{
 	public Encuesta encuestaPorFrmScaffolding(Formulario form) {
 		this.startEntityManagerFactory();
 		Encuesta encuesta = em.createNamedQuery("Formulario.BuscarFormularioConFormulario",Encuesta.class).setParameter("idFrmScaffolding", form).getSingleResult();
-		this.stopEntityManagerFactory();
+		//this.stopEntityManagerFactory();
 		return encuesta;
 	}
 
@@ -106,7 +106,7 @@ public class EncuestaDAO extends Servicio{
 		TypedQuery<Encuesta> query = em.createNamedQuery("Formulario.BuscarFormulario", Encuesta.class).setParameter("idParam",id );
 		encuesta = (Encuesta)query.getSingleResult();
 		
-		this.stopEntityManagerFactory();
+		//this.stopEntityManagerFactory();
 		
 		return encuesta;
 	}

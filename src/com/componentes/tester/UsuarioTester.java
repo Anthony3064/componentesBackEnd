@@ -1,5 +1,6 @@
 package com.componentes.tester;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 
+import com.componentes.controlador.EncuestaController;
 import com.componentes.controlador.UsuarioController;
 import com.componentes.dao.FormularioDAO;
 import com.componentes.dao.ItemDAO;
@@ -23,7 +25,7 @@ public class UsuarioTester {
 	static UsuarioController _ucontroller = new  UsuarioController(); 
 	public static void main(String[] args) {
 			
-		RegistrarPersona(); 
+		//RegistrarPersona(); 
 		//RecuperarUsuario(); 
 		//Login(); 
 		//Edit();
@@ -31,6 +33,68 @@ public class UsuarioTester {
 		
 		
 		
+		EncuestaController eC = new EncuestaController();
+		
+		for (Formulario f : eC.Get(19).getRespuestas()) {
+			
+			if (f.isIsInterface()) {
+				
+				for (Formulario f2 : eC.Get(19).getRespuestas()) {
+					
+					if (f2.isIsInterface()) {
+						
+					}else {
+						
+						for (Seccion s : f.GetSecciones()) {
+							
+							if (s.getItem().size() > 1) {
+								
+								for (Seccion s2 : f2.GetSecciones()) {
+									
+									if (s.getPregunta().equalsIgnoreCase(s2.getPregunta())) {
+										int cont1 = 0;
+										int cont2 = 0;
+										int cont3 = 0;
+										int cont4 = 0;
+										System.out.println(s.getPregunta());
+										for (Item i2 : s2.getItem()) {
+											if (s.getItem().get(0).getDefaultName().equalsIgnoreCase(i2.getDefaultName())) {
+												cont1 += 1;
+											}else if (s.getItem().get(1).getDefaultName().equalsIgnoreCase(i2.getDefaultName())) {
+												cont2 += 1;
+											}else if (s.getItem().get(2).getDefaultName().equalsIgnoreCase(i2.getDefaultName())) {
+												cont3 += 1;
+											}else if (s.getItem().get(3).getDefaultName().equalsIgnoreCase(i2.getDefaultName())) {
+												cont4 += 1;
+											}
+										}
+										System.out.println(cont1 + " " + s.getItem().get(0).getDefaultName());
+										System.out.println(cont2 + " " + s.getItem().get(1).getDefaultName());
+										System.out.println(cont3 + " " + s.getItem().get(2).getDefaultName());
+										System.out.println(cont4 + " " + s.getItem().get(3).getDefaultName());
+									}
+
+									
+									
+									
+								}
+								
+							}
+							
+						}
+						
+					}
+					
+				}
+				
+				
+			}
+			
+			
+		}
+		
+		
+		/*
 		Usuario u = new Usuario();
 		u.setNombre("Anthony");
 		u.setCorreo("anthonyestiven3064@gmail.com");
@@ -38,7 +102,8 @@ public class UsuarioTester {
 		_ucontroller.Insert(u);
 		
 		System.out.println(u.getCorreo());
-		
+		*/	
+
 	}
 	
 	public static void RegistrarPersona() {

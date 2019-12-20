@@ -58,8 +58,6 @@ public class FormularioDAO extends Servicio {
 		
 		} catch (Exception e) {
 			throw e; 
-		}finally {
-			this.stopEntityManagerFactory();
 		}
 		
 	}
